@@ -1,0 +1,5 @@
+*.sqlite
+.DS_Store
+_site
+*.gem
+.ruby-version
