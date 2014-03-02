@@ -1,4 +1,7 @@
-oada-api-sinatra-impl
-=====================
+= OADA API Sinatra Implementation
+A simple non-production implementation of the OADA API specification written in [Sinatra](http://www.sinatrarb.com/). 
 
-A Sinatra implementation of the OADA API specification.
+== Getting Started
+
+  bundle install
+  rackup -p 4567
