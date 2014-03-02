@@ -3,5 +3,7 @@ A simple non-production implementation of the OADA API specification written in 
 
 ## Getting Started
 
+```
   bundle install
   rackup -p 4567
+```
