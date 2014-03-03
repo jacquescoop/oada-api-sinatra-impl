@@ -5,9 +5,9 @@ opts="-v"
 
 i=0
 #cmdList[((i++))]="curl -X GET ${opts} ${url}/files"
-#cmdList[((i++))]="curl -X GET ${opts} ${url}/files"
-cmdList[((i++))]="curl -X PUT ${opts}  -d file_format=csv -silent --location --upload-file yield-data.csv ${url}/files/yield/yield-data.csv?file_format=csv"
-#cmdList[((i++))]="curl -X DELETE ${opts} ${url}/files"
+#cmdList[((i++))]="curl -X GET ${opts} -d file_format=csv ${url}/files/yield/yield-data.csv?file_format=csv"
+cmdList[((i++))]="curl -X PUT ${opts} -d file_format=csv -silent --location --upload-file yield-data-upload.csv ${url}/files/yield/yield-data.csv?file_format=csv"
+#cmdList[((i++))]="curl -X DELETE ${opts} ${url}/files/yield/yield-data.csv?file_format=csv"
 #cmdList[((i++))]="curl -X GET ${opts} ${url}/metadata"
 #cmdList[((i++))]="curl -X PUT ${opts} ${url}/metadata"
 #cmdList[((i++))]="curl -X GET ${opts} ${url}/search"

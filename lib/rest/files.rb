@@ -4,6 +4,8 @@ require "fileutils"
 
 class Files < Sinatra::Base
 
+   rootDir = "data"
+
    before do
      # Placeholder for auth filter
    end
@@ -12,7 +14,14 @@ class Files < Sinatra::Base
    end
 
    get '/files/*' do
-      "Get Files Endpoint"
+      fileFormat = params[:file_format]
+      filePath = params[:splat][0]
+
+      attachment File.basename(filePath)
+
+      printf "{File Format: %s}{File Path: %s}\n", fileFormat, filePath 
+  
+      send_file "#{rootDir}/#{filePath}"
    end
 
    put '/files/*' do
@@ -21,11 +30,9 @@ class Files < Sinatra::Base
       filePath = params[:splat][0]
       fileData = params
 
-      printf "File Format: %s\n", fileFormat
-      printf "File Path: %s\n", filePath 
-      printf "File Data: %s\n", fileData
+      printf "{File Format: %s}{File Path: %s}{File Data: %s}\n", fileFormat, filePath, fileData
 
-      FileUtils.mkdir_p(File.dirname("data/" + filePath))
+      FileUtils.mkdir_p(File.dirname("#{rootDir}/#{filePath}"))
       File.open("data/" + filePath, 'w+') do |file|
          file.write(request.body.read)
       end
@@ -34,7 +41,10 @@ class Files < Sinatra::Base
    end
 
    delete '/files/*' do
-      "Delete Files Endpoint"
+      filePath = params[:splat][0]
+      printf "{File Path: %s}\n", filePath 
+      File.delete("#{rootDir}/#{filePath}")
+      response.status = 200
    end
 
    # start the server if ruby file executed directly
