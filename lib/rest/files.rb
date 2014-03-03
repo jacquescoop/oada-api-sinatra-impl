@@ -1,5 +1,6 @@
 require "sinatra/json"
 require "sinatra/base"
+require "fileutils"
 
 class Files < Sinatra::Base
 
@@ -8,26 +9,31 @@ class Files < Sinatra::Base
    end
 
    after do
-     content_type :json
    end
 
-   get '/files' do
+   get '/files/*' do
       "Get Files Endpoint"
    end
 
-   put '/files' do
+   put '/files/*' do
+      content_type 'multipart/form-data'
+      fileFormat = params[:file_format]
+      filePath = params[:splat][0]
+      fileData = params
 
-      #File.open(params[:id].to_s, 'w+') do |file|
-      #   file.write(request.body.read)
-      #end
+      printf "File Format: %s\n", fileFormat
+      printf "File Path: %s\n", filePath 
+      printf "File Data: %s\n", fileData
 
-      #File.open('uploads/' + params['myfile'][:filename], "w") do |f|
-      #  f.write(params['myfile'][:tempfile].read)
-      #end
+      FileUtils.mkdir_p(File.dirname("data/" + filePath))
+      File.open("data/" + filePath, 'w+') do |file|
+         file.write(request.body.read)
+      end
 
+      filePath
    end
 
-   delete '/files' do
+   delete '/files/*' do
       "Delete Files Endpoint"
    end
 
