@@ -3,8 +3,16 @@ require "sinatra/base"
 
 class Search < Sinatra::Base
 
+   before do
+     # Placeholder for auth filter
+   end
+
+   after do
+     content_type :json
+   end
+
    get '/search' do
-      "Search Endpoint"
+      "Get Search Endpoint"
    end
 
    # start the server if ruby file executed directly

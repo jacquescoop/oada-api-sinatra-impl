@@ -3,8 +3,20 @@ require "sinatra/base"
 
 class Metadata < Sinatra::Base
 
+   before do
+     # Placeholder for auth filter
+   end
+
+   after do
+     content_type :json
+   end
+
    get '/metadata' do
-      "Metadata Endpoint"
+      "Get Metadata Endpoint"
+   end
+
+   put '/metadata' do
+      "Put Metadata Endpoint"
    end
 
    # start the server if ruby file executed directly
